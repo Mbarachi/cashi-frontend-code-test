@@ -6,11 +6,11 @@ import { TrendingUp, TrendingDown, Wallet } from "lucide-react";
 
 export const Dashboard: React.FC = () => {
   const transactions = [
-    { merchant: 'Costco Wholesale', date: 'Oct 28, 2023', category: 'Groceries', amount: '-$154.21', icon: 'shopping_cart' },
-    { merchant: 'Salary Deposit', date: 'Oct 27, 2023', category: 'Income', amount: '+$2,500.00', positive: true, icon: 'work' },
-    { merchant: 'Starbucks', date: 'Oct 26, 2023', category: 'Food & Drink', amount: '-$6.85', icon: 'coffee' },
-    { merchant: 'AT&T Mobility Bill', date: 'Oct 25, 2023', category: 'Bills', amount: '-$85.00', icon: 'receipt_long' },
-    { merchant: 'Shell Gas Station', date: 'Oct 24, 2023', category: 'Transportation', amount: '-$55.30', icon: 'local_gas_station' },
+    { merchant: 'Costco Wholesale', date: 'Oct 28, 2023', amount: '-$154.21' },
+    { merchant: 'Salary Deposit', date: 'Oct 27, 2023', amount: '+$2,500.00' },
+    { merchant: 'Starbucks', date: 'Oct 26, 2023', amount: '-$6.85', icon: 'coffee' },
+    { merchant: 'AT&T Mobility Bill', date: 'Oct 25, 2023', amount: '-$85.00' },
+    { merchant: 'Shell Gas Station', date: 'Oct 24, 2023', amount: '-$55.30' },
   ];
 
   return (

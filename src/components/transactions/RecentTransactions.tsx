@@ -1,13 +1,9 @@
 import { TransactionTable } from "./TransactionTable";
-import type { LucideIcon } from "lucide-react";
 
 interface Transaction {
     merchant: string;
     date: string;
-    category: string;
     amount: string;
-    positive?: boolean;
-    icon: LucideIcon;
 }
 
 interface RecentTransactionsProps {
