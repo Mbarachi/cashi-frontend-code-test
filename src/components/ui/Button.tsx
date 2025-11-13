@@ -4,20 +4,29 @@ import clsx from "clsx";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   fullWidth?: boolean;
+  size?: "sm" | "md" | "lg"; // type it explicitly
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   variant = "primary",
   fullWidth = false,
+  size = "lg", // default size
   className,
   ...props
 }) => {
+  const sizeClasses: Record<NonNullable<ButtonProps["size"]>, string> = {
+    sm: "h-10 px-4 text-sm",
+    md: "h-12 px-5 text-base",
+    lg: "h-14 px-6 text-lg",
+  };
+
   return (
     <button
       {...props}
       className={clsx(
-        "flex items-center justify-center h-14 rounded-lg font-bold tracking-wide transition-colors",
+        "flex items-center justify-center rounded-lg font-bold tracking-wide transition-colors",
+        sizeClasses[size], // TS is happy now
         {
           "bg-primary text-[#112217] hover:bg-primary/90": variant === "primary",
           "bg-transparent border border-primary text-primary hover:bg-primary/10":

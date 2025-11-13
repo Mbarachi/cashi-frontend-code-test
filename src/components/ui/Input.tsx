@@ -8,7 +8,7 @@ interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   showPasswordToggle?: boolean;
 }
 
-const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
+const Input = React.forwardRef<HTMLInputElement, InputFieldProps>(
   ({ label, error, type = "text", showPasswordToggle = false, className, ...props }, ref) => {
     const [showPassword, setShowPassword] = useState(false);
     const inputType =
@@ -56,5 +56,5 @@ const InputField = React.forwardRef<HTMLInputElement, InputFieldProps>(
   }
 );
 
-InputField.displayName = "InputField";
-export default InputField;
+Input.displayName = "InputField";
+export default Input;

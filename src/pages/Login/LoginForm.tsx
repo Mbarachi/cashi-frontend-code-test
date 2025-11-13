@@ -1,6 +1,6 @@
 import React from "react";
 import Button from '@components/ui/Button'
-import InputField from "@components/ui/InputField";
+import Input from "@components/ui/Input";
 import Checkbox from "@components/ui/Checkbox";
 
 const LoginForm: React.FC = () => {
@@ -16,8 +16,8 @@ const LoginForm: React.FC = () => {
       </div>
 
       <div className="flex flex-col gap-6">
-        <InputField label="Email Address" placeholder="Enter your email" />
-        <InputField
+        <Input label="Email Address" placeholder="Enter your email" />
+        <Input
           label="Password"
           type="password"
           placeholder="Enter your password"
