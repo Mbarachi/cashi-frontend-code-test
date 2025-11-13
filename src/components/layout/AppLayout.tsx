@@ -11,14 +11,14 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, pageTitle }) => 
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="flex h-screen">
+        <div className="flex h-screen bg-gray-50-">
             {/* Sidebar */}
             <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
             {/* Main content */}
             <div className="flex flex-col flex-1">
                 {/* Header */}
                 <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} pageTitle={pageTitle} />
-                <main className="flex-1 overflow-auto p-4">{children}</main>
+                <main className="flex-1 overflow-auto p-10">{children}</main>
             </div>
         </div>
     );
