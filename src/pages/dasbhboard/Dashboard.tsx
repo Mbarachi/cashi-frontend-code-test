@@ -20,7 +20,7 @@ export const Dashboard: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 flex flex-col justify-between rounded-xl bg-surface-light p-6 border border-border-light">
             <div>
-              <p className="text-text-light-secondary text-sm font-medium mb-1">Total Balance</p>
+              <p className="text-text-light-secondary text-sm font-medium mb-1">Account Balance</p>
               <p className="text-text-light-primary text-4xl font-bold leading-tight tracking-[-0.033em]">$12,450.75</p>
             </div>
             <div className="mt-6 flex gap-3">
