@@ -4,6 +4,7 @@ import LoginPage from "./pages/Login/LoginPage";
 import { Dashboard } from "./pages/dasbhboard/Dashboard";
 import { TransactionsPage } from "./pages/transaction/Transactions";
 import TransactionDetail from "./pages/transaction/TransactionDetail";
+import { ProtectedRoute } from "@components/ProtectedRoute";
 
 function App() {
   return (
@@ -13,9 +14,21 @@ function App() {
         {/* Public page */}
         <Route path="/login" element={<LoginPage />} />
         <Route element={<AppLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/transactions" element={<TransactionsPage />} />
-          <Route path="/transactions/:id" element={<TransactionDetail />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/transactions" element={
+            <ProtectedRoute>
+              <TransactionsPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/transactions/:id" element={
+            <ProtectedRoute>
+              <TransactionDetail />
+            </ProtectedRoute>
+          } />
         </Route>
       </Routes>
     </Router>
