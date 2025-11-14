@@ -15,6 +15,7 @@ export const useDashboardStats = () => {
             const data = await dashboardService.getStats();
             return data;
         },
+        refetchOnWindowFocus: true,
         enabled: true,
     });
 };
