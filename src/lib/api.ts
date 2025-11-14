@@ -134,10 +134,24 @@ const dashboardHandler = http.get("/api/dashboard/stats", ({ cookies }) => {
   return HttpResponse.json(json);
 });
 
+const logoutHandler = http.post("/api/auth/logout", ({ cookies }) => {
+  if (!cookies.sessionId) {
+    return new HttpResponse(null, { status: 401 });
+  }
+
+  // Expire the session
+  return new HttpResponse(null, {
+    status: 200,
+    headers: { "set-cookie": "sessionId=; Max-Age=0" },
+  });
+});
+
+
 export const apiHandlers = [
   loginHandler,
   meHandler,
   dashboardHandler,
   transactionsHandler,
   transactionHandler,
+  logoutHandler
 ];
