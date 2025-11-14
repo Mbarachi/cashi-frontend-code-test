@@ -6,11 +6,17 @@ import { useTransactions } from "@/hooks/useTransactions";
 
 
 export const TransactionsPage: React.FC = () => {
+  const [page, setPage] = useState(1);
   const [merchantFilter, setMerchantFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
-  const { data: transactionsData, isLoading } = useTransactions();
+  const { data: transactionsData, isLoading } = useTransactions({
+    page: page,
+    merchant: merchantFilter || undefined,
+    date: dateFilter || undefined,
+  });
 
+  const totalPages = transactionsData?.pagination.totalPages ?? 1;
 
   return (
     <div className="min-h-screen">
@@ -21,9 +27,9 @@ export const TransactionsPage: React.FC = () => {
         </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row sm:items-end gap-4 mb-4 flex-wrap">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4">
         {/* Merchant Filter */}
-        <div className="flex flex-col flex-1 min-w-[200px]">
+        <div className="flex-1 min-w-[200px]">
           <label className="text-sm text-gray-500 mb-1">Filter by Merchant</label>
           <Input
             placeholder="Search..."
@@ -34,7 +40,7 @@ export const TransactionsPage: React.FC = () => {
         </div>
 
         {/* Date Filter */}
-        <div className="flex flex-col flex-1 min-w-[150px]">
+        <div className="flex-1 min-w-[150px]">
           <label className="text-sm text-gray-500 mb-1">Filter by Date</label>
           <Input
             type="date"
@@ -44,13 +50,14 @@ export const TransactionsPage: React.FC = () => {
           />
         </div>
 
-        <div className="flex-none">
+        <div className="flex-none sm:mt-0">
           <Button
             size="sm"
-            className="w-full sm:w-auto"
+            className="w-full mt-4 sm:w-auto"
             onClick={() => {
               setMerchantFilter("");
               setDateFilter("");
+              setPage(1);
             }}
           >
             Reset
@@ -60,8 +67,25 @@ export const TransactionsPage: React.FC = () => {
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <TransactionTable transactions={transactionsData?.items ?? []} />
-        <div className="flex justify-end p-4 border-t border-border-light text-sm text-gray-500">
-          Page 1 of 1
+        {/* Pagination */}
+        <div className="flex items-center justify-end p-4 border-t border-border-light text-sm text-gray-500 gap-3">
+          <Button
+            size="sm"
+            disabled={page === 1}
+            onClick={() => setPage((prev) => prev - 1)}
+          >
+            Previous
+          </Button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <Button
+            size="sm"
+            disabled={page === totalPages}
+            onClick={() => setPage((prev) => prev + 1)}
+          >
+            Next
+          </Button>
         </div>
       </div>
     </div>

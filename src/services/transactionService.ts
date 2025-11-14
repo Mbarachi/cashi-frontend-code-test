@@ -8,7 +8,7 @@ const cleanParams = (filters: TransactionFilters) =>
 
 export const transactionService = {
     getTransactionsList: async (filters: TransactionFilters = {}) => {
-        const { data } = await apiClient.get("/api/transactions", {
+        const { data } = await apiClient.get(`/api/transactions`, {
             params: cleanParams(filters),
         });
         return data;
