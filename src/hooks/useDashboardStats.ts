@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { dashboardService } from "@/services/dashboardService";
+import type { Transaction } from "@/types/transaction";
 
 export type DashboardStats = {
-    mostRecentTransactions: any[];
+    mostRecentTransactions: Transaction[];
     expenses: { amount: number; currency: string };
     income: { amount: number; currency: string };
 };

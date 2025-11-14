@@ -2,35 +2,15 @@ import React, { useState } from "react";
 import Input from "@components/ui/Input";
 import Button from "@components/ui/Button";
 import { TransactionTable } from "@components/transactions/TransactionTable";
+import { useTransactions } from "@/hooks/useTransactions";
 
-interface Transaction {
-  merchant: string;
-  date: string;
-  amount: string;
-}
-
-// Sample transaction data
-const transactionsData: Transaction[] = [
-  { merchant: "Amazon", date: "2025-11-01", amount: "$120.00" },
-  { merchant: "Salary", date: "2025-11-03", amount: "$2,500.00" },
-  { merchant: "Starbucks", date: "2025-11-04", amount: "$8.50" },
-  { merchant: "Apple", date: "2025-11-05", amount: "$999.00" },
-  { merchant: "Uber", date: "2025-11-06", amount: "$15.00" },
-  { merchant: "Netflix", date: "2025-11-07", amount: "$12.00" },
-];
 
 export const TransactionsPage: React.FC = () => {
   const [merchantFilter, setMerchantFilter] = useState("");
   const [dateFilter, setDateFilter] = useState("");
 
-  // Filter transactions
-  const filteredTransactions = transactionsData.filter((tx) => {
-    const matchMerchant = merchantFilter
-      ? tx.merchant.toLowerCase().includes(merchantFilter.toLowerCase())
-      : true;
-    const matchDate = dateFilter ? tx.date === dateFilter : true;
-    return matchMerchant && matchDate;
-  });
+  const { data: transactionsData, isLoading } = useTransactions();
+
 
   return (
     <div className="min-h-screen">
@@ -79,7 +59,7 @@ export const TransactionsPage: React.FC = () => {
       </div>
 
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <TransactionTable transactions={filteredTransactions} />
+        <TransactionTable transactions={transactionsData?.items ?? []} />
         <div className="flex justify-end p-4 border-t border-border-light text-sm text-gray-500">
           Page 1 of 1
         </div>

@@ -15,18 +15,7 @@ export const Dashboard: React.FC = () => {
   const netExpense = stats ? (stats.income.amount) + Math.abs(stats.expenses.amount) : 0;
 
 
-  const recentTransactions = stats?.mostRecentTransactions.map(txn => ({
-    id: txn.id,
-    merchant: txn.merchant,
-    date: new Date(txn.date).toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    }),
-    amount: `${txn.amount < 0 ? "-" : "+"}$${Math.abs(txn.amount).toFixed(2)}`,
-    description: txn.description,
-    status: txn.status,
-  })) ?? [];
+  const recentTransactions = stats?.mostRecentTransactions
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -55,7 +44,7 @@ export const Dashboard: React.FC = () => {
           <h2 className="text-text-light-primary text-xl font-bold leading-tight tracking-[-0.015em]">Recent Transactions</h2>
           <a className="text-primary text-sm font-semibold hover:underline" href="#">View All</a>
         </div>
-        <RecentTransactions transactions={recentTransactions} />
+        <RecentTransactions transactions={recentTransactions ?? []} />
       </div>
     </div>
   );

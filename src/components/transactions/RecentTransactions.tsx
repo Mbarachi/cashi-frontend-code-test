@@ -1,10 +1,5 @@
+import type { Transaction } from "@/types/transaction";
 import { TransactionTable } from "./TransactionTable";
-
-interface Transaction {
-    merchant: string;
-    date: string;
-    amount: string;
-}
 
 interface RecentTransactionsProps {
     transactions: Transaction[];

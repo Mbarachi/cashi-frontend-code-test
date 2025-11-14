@@ -1,11 +1,8 @@
-interface TransactionTableProps {
-    merchant: string;
-    date: string;
-    amount: string;
-    positive?: boolean;
-}
+import type { Transaction } from "@/types/transaction";
+import { formatDate } from "@lib/utils/formatDate";
 
-export const TransactionTable: React.FC<{ transactions: TransactionTableProps[] }> = ({ transactions }) => (
+
+export const TransactionTable: React.FC<{ transactions: Transaction[] }> = ({ transactions }) => (
     <div className="rounded-lg overflow-hidden">
         {/* Header */}
         <div className="grid grid-cols-3 gap-4 bg-gray-100 px-6 py-3">
@@ -15,15 +12,15 @@ export const TransactionTable: React.FC<{ transactions: TransactionTableProps[] 
         </div>
 
         {/* Transactions */}
-        {transactions.slice(0, 5).map((tx, idx) => (
+        {transactions.map((tx, idx) => (
             <div
                 key={idx}
                 className="grid grid-cols-3 gap-4 items-center px-6 py-4 hover:bg-gray-50 transition-colors"
             >
                 <p className="text-sm font-medium text-text-light-primary">{tx.merchant}</p>
-                <p className="text-sm text-text-light-secondary">{tx.date}</p>
+                <p className="text-sm text-text-light-secondary">{formatDate(tx.date)}</p>
                 <p
-                    className={`text-sm font-medium text-right ${tx.positive ? 'text-positive' : 'text-negative'
+                    className={`text-sm font-medium text-right ${tx.amount > 0 ? 'text-positive' : 'text-negative'
                         }`}
                 >
                     {tx.amount}
