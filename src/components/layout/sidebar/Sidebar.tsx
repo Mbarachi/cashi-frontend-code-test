@@ -12,6 +12,9 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen }) => {
     const logoutMutation = useLogout();
     const { data: user } = useCurrentUser()
+    const closeSidebar = () => {
+        setSidebarOpen(false);
+    }
     return (
         <>
             <div
@@ -31,10 +34,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ sidebarOpen, setSidebarOpen })
                         <h2 className="text-xl font-bold leading-tight tracking-[-0.015em]">FinTrack</h2>
                     </div>
                     <nav className="flex flex-col gap-2">
-                        <SidebarNavItem icon={Home} label="Dashboard" to="/dashboard" />
-                        <SidebarNavItem icon={Wallet} label="Transactions" to="/transactions" />
-                        <SidebarNavItem icon={BarChart2} label="Reports" />
-                        <SidebarNavItem icon={Settings} label="Settings" />
+                        <SidebarNavItem icon={Home} label="Dashboard" to="/dashboard" onClick={closeSidebar} />
+                        <SidebarNavItem icon={Wallet} label="Transactions" to="/transactions" onClick={closeSidebar} />
+                        <SidebarNavItem icon={BarChart2} label="Reports" onClick={closeSidebar} />
+                        <SidebarNavItem icon={Settings} label="Settings" onClick={closeSidebar} />
                     </nav>
                 </div>
                 <div className="flex flex-col gap-4">

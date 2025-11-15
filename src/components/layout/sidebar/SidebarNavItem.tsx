@@ -18,6 +18,7 @@ export const SidebarNavItem: React.FC<SidebarNavItemProps> = ({ icon: Icon, labe
                     `flex items-center gap-3 rounded-lg px-3 py-2 ${isActive ? "bg-primary/20 text-primary" : "text-text-light-secondary hover:bg-gray-100"
                     }`
                 }
+                onClick={onClick}
             >
                 <Icon className="w-5 h-5" />
                 <p className="text-sm font-medium">{label}</p>
