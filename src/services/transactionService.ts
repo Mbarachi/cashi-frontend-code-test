@@ -13,4 +13,9 @@ export const transactionService = {
         });
         return data;
     },
+
+    getTransactionById: async (id: string) => {
+        const { data } = await apiClient.get(`/api/transactions/${id}`);
+        return data;
+    }
 };

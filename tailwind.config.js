@@ -9,6 +9,8 @@ export default {
     extend: {
       colors: {
         primary: '#13ec5b',
+        positive: "#16a34a", // green-600
+        negative: "#dc2626", // red-600
         'background-light': '#f6f8f6',
         'background-dark': '#102216',
       },

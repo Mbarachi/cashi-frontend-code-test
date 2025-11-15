@@ -2,6 +2,7 @@ import type { Transaction } from "@/types/transaction";
 import Button from "@components/ui/Button";
 import { formatDate } from "@lib/utils/formatDate";
 import { EyeIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface TransactionTableProps {
     transactions: Transaction[];
@@ -25,11 +26,17 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
         date: "text-sm text-text-light-secondary",
         paymentMethod: "text-sm text-text-light-secondary",
         referenceNumber: "text-sm text-text-light-secondary",
-        status: "px-3 py-1 text-xs font-semibold rounded-[5px] w-fit text-white capitalize",
+        status: "px-3 py-1 text-xs font-semibold rounded-[5px] w-fit capitalize",
         amount: "text-sm font-medium",
     };
 
     const minColWidthPx = 140;
+
+    const navigate = useNavigate();
+
+    const handleViewDetails = (id: string) => {
+        navigate(`/transactions/${id}`);
+    };
 
     return (
         <div className="w-full overflow-x-auto">
@@ -103,9 +110,9 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
                             )}
 
                             {columns.includes("action") && (
-                                <Button size="sm" variant="secondary" className="flex gap-1">
+                                <Button size="sm" variant="secondary" className="flex gap-1" onClick={() => handleViewDetails(tx.id)}>
                                     View Details
-                                    <EyeIcon size={20}/>
+                                    <EyeIcon size={20} />
                                 </Button>
                             )}
                         </div>
