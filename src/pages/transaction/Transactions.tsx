@@ -4,6 +4,7 @@ import Button from "@components/ui/Button";
 import { TransactionTable } from "@components/transactions/TransactionTable";
 import { useTransactions } from "@/hooks/useTransactions";
 import { useDebounce } from "@/hooks/useDebounce";
+import Loader from "@components/ui/Loader";
 
 
 export const TransactionsPage: React.FC = () => {
@@ -90,6 +91,7 @@ export const TransactionsPage: React.FC = () => {
           </Button>
         </div>
       </div>
+      {isLoading && <Loader />}
     </div>
   );
 };
