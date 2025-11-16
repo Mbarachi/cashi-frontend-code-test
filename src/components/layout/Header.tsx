@@ -19,11 +19,5 @@ export const Header: React.FC<HeaderProps> = ({ onToggleSidebar, pageTitle }) =>
             {/* Page title */}
             {pageTitle && <h1 className="text-lg font-semibold">{pageTitle}</h1>}
         </div>
-
-        {/* Right-side actions */}
-        <div className="flex items-center gap-4">
-            {/* Example: user avatar */}
-            <div className="w-10 h-10 rounded-full bg-gray-200" />
-        </div>
     </header>
 );
