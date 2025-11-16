@@ -22,7 +22,7 @@ export const TransactionsPage: React.FC = () => {
   const totalPages = transactionsData?.pagination.totalPages ?? 1;
 
   return (
-    <div className="min-h-screen">
+   <div className="min-h-screen w-full overflow-x-hidden px-2 sm:px-0">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-text-light-primary">Transactions</h1>
         <p className="text-sm text-text-light-secondary mt-1">

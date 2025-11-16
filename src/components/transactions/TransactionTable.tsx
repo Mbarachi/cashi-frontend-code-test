@@ -21,16 +21,6 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
     transactions,
     columns = ["date", "merchant", "amount"],
 }) => {
-    const columnClasses: Record<string, string> = {
-        merchant: "text-sm font-medium text-text-light-primary",
-        date: "text-sm text-text-light-secondary",
-        paymentMethod: "text-sm text-text-light-secondary",
-        referenceNumber: "text-sm text-text-light-secondary",
-        status: "px-3 py-1 text-xs font-semibold rounded-[5px] w-fit capitalize",
-        amount: "text-sm font-medium",
-    };
-
-    const minColWidthPx = 140;
 
     const navigate = useNavigate();
 
@@ -39,95 +29,72 @@ export const TransactionTable: React.FC<TransactionTableProps> = ({
     };
 
     return (
-        <div className="w-full overflow-x-auto">
-            < div className="rounded-lg overflow-hidden" >
-                {/* Header */}
-                <div
-                    className="grid gap-4 px-6 py-3"
-                    style={{
-                        gridTemplateColumns: `repeat(${columns.length}, 1fr)`,
-                    }}
-                >
-                    {
-                        columns.map((col) => (
-                            <p
+        <div className="max-w-[400px] overflow-x-auto">
+            <table className="min-w-max w-full border-collapse">
+                <thead className="bg-surface-light">
+                    <tr>
+                        {columns.map((col) => (
+                            <th
                                 key={col}
-                                className="text-sm font-semibold text-text-light-secondary"
+                                className="px-4 py-2 text-left text-sm font-semibold text-text-light-secondary whitespace-nowrap"
                             >
                                 {col.charAt(0).toUpperCase() + col.slice(1)}
-                            </p>
-                        ))
-                    }
-                </div >
-
-                {/* Rows */}
-                {
-                    transactions.map((tx) => (
-                        <div
-                            key={tx.id}
-                            className="grid gap-4 items-center px-6 py-4 hover:bg-gray-50 transition-colors"
-                            style={{
-                                gridTemplateColumns: `repeat(${columns.length}, minmax(${minColWidthPx}px, 1fr))`,
-                            }}
-                        >
+                            </th>
+                        ))}
+                    </tr>
+                </thead>
+                <tbody className="text-sm">
+                    {transactions.map((tx) => (
+                        <tr key={tx.id} className="hover:bg-gray-50 transition-colors">
                             {columns.includes("date") && (
-                                <p className={columnClasses.date}>{formatDate(tx.date)}</p>
+                                <td className="px-4 py-2 whitespace-nowrap">{formatDate(tx.date)}</td>
                             )}
-
                             {columns.includes("merchant") && (
-                                <p className={columnClasses.merchant}>{tx.merchant}</p>
+                                <td className="px-4 py-2 whitespace-nowrap">{tx.merchant}</td>
                             )}
-
                             {columns.includes("amount") && (
-                                <p
-                                    className={`${columnClasses.amount} ${tx.amount > 0 ? "text-positive" : "text-negative"
-                                        }`}
-                                >
+                                <td className={`px-4 py-2 whitespace-nowrap ${tx.amount < 0 ? "text-negative" : "text-positive"}`}>
                                     {new Intl.NumberFormat("en-us", {
                                         style: "currency",
                                         currency: "USD",
-                                        currencyDisplay: "symbol",
                                     }).format(tx.amount)}
-                                </p>
+                                </td>
                             )}
-
                             {columns.includes("paymentMethod") && (
-                                <p className={columnClasses.paymentMethod}>{tx.paymentMethod}</p>
+                                <td className="px-4 py-2 whitespace-nowrap">{tx.paymentMethod}</td>
                             )}
-
                             {columns.includes("referenceNumber") && (
-                                <p className={columnClasses.referenceNumber}>
-                                    {tx.referenceNumber}
-                                </p>
+                                <td className="px-4 py-2 whitespace-nowrap">{tx.referenceNumber}</td>
                             )}
-
                             {columns.includes("status") && (
-                                <span
-                                    className={`${columnClasses.status} ${tx.status === "completed" ? "bg-green-200 text-green-500" : "bg-amber-200 text-amber-500"
-                                        }`}
-                                >
-                                    {tx.status}
-                                </span>
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <span
+                                        className={`${tx.status === "completed"
+                                            ? "bg-green-200 text-green-500"
+                                            : "bg-amber-200 text-amber-500"
+                                            } px-2 py-1 text-xs font-semibold rounded-[5px] w-fit capitalize`}
+                                    >
+                                        {tx.status}
+                                    </span>
+                                </td>
                             )}
-
                             {columns.includes("action") && (
-                                <Button size="sm" variant="secondary" className="flex gap-1" onClick={() => handleViewDetails(tx.id)}>
-                                    View Details
-                                    <EyeIcon size={20} />
-                                </Button>
+                                <td className="px-4 py-2 whitespace-nowrap">
+                                    <Button
+                                        size="sm"
+                                        variant="secondary"
+                                        className="flex gap-1"
+                                        onClick={() => handleViewDetails(tx.id)}
+                                    >
+                                        View
+                                        <EyeIcon size={20} />
+                                    </Button>
+                                </td>
                             )}
-                        </div>
-                    ))
-                }
-
-                {
-                    transactions.length === 0 && (
-                        <div className="p-6 text-center text-sm text-text-light-secondary">
-                            No transactions found.
-                        </div>
-                    )
-                }
-            </div >
-        </div >
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 };

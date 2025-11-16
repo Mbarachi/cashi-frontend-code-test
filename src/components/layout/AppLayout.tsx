@@ -19,7 +19,11 @@ export const AppLayout: React.FC<AppLayoutProps> = () => {
             <div className="flex flex-col flex-1">
                 {/* Header */}
                 <Header onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
-                <main className="flex-1 overflow-auto p-10"> <Outlet /> </main>
+                <main className="flex-1 p-4 md:p-10 bg-background-light min-h-screen overflow-y-auto overflow-x-hidden">
+                    <div className="w-full"> {/* keep Outlet inside this so pages fill width */}
+                        <Outlet />
+                    </div>
+                </main>
             </div>
         </div>
     );

@@ -18,7 +18,7 @@ setupMocking().then(() => {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
-        <Toaster position="top-right" />
+        <Toaster position="top-right" richColors/>
       </QueryClientProvider>
     </StrictMode>
   );
